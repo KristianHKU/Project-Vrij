@@ -327,4 +327,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 0.1
-  maxSpeed: 1
+  maxSpeed: 2
