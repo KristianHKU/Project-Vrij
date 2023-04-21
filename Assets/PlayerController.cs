@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,22 +27,24 @@ public class PlayerController : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             Vector3 touchPosition = touch.position;
 
-            //Debug.Log(touchPosition.x);
-
-            if (touchPosition.x > middleScreenPosition - Screen.width / 10f && touchPosition.x < middleScreenPosition + Screen.width / 10f)
+            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
             {
-                Debug.Log("You touched inbetween 40% and 60% " + touchPosition.x);
+                if (touchPosition.x > middleScreenPosition - Screen.width / 10f && touchPosition.x < middleScreenPosition + Screen.width / 10f)
+                {
+                    Debug.Log("You touched in between 40% and 60% " + touchPosition.x);
+                }
+                else if (touchPosition.x < middleScreenPosition)
+                {
+                    isMovingLeft = true;
+                }
+                else if (touchPosition.x > middleScreenPosition)
+                {
+                    isMovingRight = true;
+                }
             }
-            else if (touchPosition.x < middleScreenPosition)
-            {
-                isMovingLeft = true;
-            }
-            else if (touchPosition.x > middleScreenPosition)
-            {
-                isMovingRight = true;
-            }
-
         }
+
+
 
         if (Input.touchCount != 1)
         {
