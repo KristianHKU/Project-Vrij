@@ -21,9 +21,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount == 1)
         {
-            Vector3 touchPosition = Input.mousePosition;
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPosition = touch.position;
+
+            //Debug.Log(touchPosition.x);
 
             if (touchPosition.x > middleScreenPosition - Screen.width / 10f && touchPosition.x < middleScreenPosition + Screen.width / 10f)
             {
@@ -40,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.touchCount != 1)
         {
             isMovingLeft = false;
             isMovingRight = false;
